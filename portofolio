@@ -210,7 +210,7 @@
                     
                     <!-- Profile Container -->
                     <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full glass-panel border-2 border-neonCyan p-3 overflow-hidden flex items-center justify-center">
-                        <img id="profileImage" src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=800&auto=format&fit=crop" 
+                        <img id="profileImage" src="https://github.com/rezkyrafael50-hue/rezky/blob/main/WhatsApp%20Image%202026-10-22%20at%2013.59.44.jpeg?raw=true" 
                              alt="Rezky Rafael Wachyudi" 
                              class="w-full h-full rounded-full object-cover transition-transform duration-500 group-hover:scale-105">
 
