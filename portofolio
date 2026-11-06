@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezky Rafael Wachyudi - TKJ Specialist Portfolio</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts Inter & Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyberDark: '#05070f',
+                        cyberCard: 'rgba(15, 23, 42, 0.75)',
+                        neonCyan: '#00f3ff',
+                        neonMagenta: '#ff007f',
+                        neonGreen: '#00ff88',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Orbitron', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 15px rgba(0, 243, 255, 0.5), 0 0 30px rgba(0, 243, 255, 0.2)',
+                        'neon-magenta': '0 0 15px rgba(255, 0, 127, 0.5), 0 0 30px rgba(255, 0, 127, 0.2)',
+                        'neon-green': '0 0 15px rgba(0, 255, 136, 0.5), 0 0 30px rgba(0, 255, 136, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Neon Animations & FX */
+        body {
+            background-color: #05070f;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Neon Glow Texts */
+        .text-glow-cyan {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.7), 0 0 20px rgba(0, 243, 255, 0.4);
+        }
+        .text-glow-magenta {
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.7), 0 0 20px rgba(255, 0, 127, 0.4);
+        }
+
+        /* Glassmorphism card */
+        .glass-panel {
+            background: rgba(13, 17, 30, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 243, 255, 0.18);
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(0, 243, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05070f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00f3ff;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff007f;
+        }
+
+        /* Radar Pulse Animation */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.03); }
+        }
+        .animate-pulse-slow {
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased relative">
+
+    <!-- Interactive Network Nodes Background Canvas -->
+    <canvas id="networkCanvas" class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none"></canvas>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-cyan-500/20 px-4 lg:px-12 py-3 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-400 flex items-center justify-center text-neonCyan group-hover:scale-105 transition-transform">
+                    <i class="fa-solid me-0 fa-network-wired text-xl"></i>
+                </div>
+                <span class="font-tech text-lg sm:text-xl font-bold tracking-wider text-white">
+                    RRW<span class="text-neonCyan">.TECH</span>
+                </span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8 font-tech text-xs tracking-widest text-gray-300">
+                <a href="#home" class="hover:text-neonCyan transition-colors py-1 relative group">
+                    BERANDA
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-neonCyan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#about" class="hover:text-neonCyan transition-colors py-1 relative group">
+                    TENTANG
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-neonCyan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#skills" class="hover:text-neonCyan transition-colors py-1 relative group">
+                    KEAHLIAN TKJ
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-neonCyan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#projects" class="hover:text-neonCyan transition-colors py-1 relative group">
+                    PROYEK
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-neonCyan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#contact" class="hover:text-neonCyan transition-colors py-1 relative group">
+                    KONTAK
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-neonCyan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-cyan-400 text-2xl focus:outline-none p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 pt-4 border-t border-cyan-500/20 flex flex-col space-y-4 font-tech text-sm text-center bg-cyberDark/95 p-4 rounded-xl border border-cyan-500/30">
+            <a href="#home" class="mobile-link text-gray-300 hover:text-neonCyan py-2">BERANDA</a>
+            <a href="#about" class="mobile-link text-gray-300 hover:text-neonCyan py-2">TENTANG</a>
+            <a href="#skills" class="mobile-link text-gray-300 hover:text-neonCyan py-2">KEAHLIAN TKJ</a>
+            <a href="#projects" class="mobile-link text-gray-300 hover:text-neonCyan py-2">PROYEK</a>
+            <a href="#contact" class="mobile-link text-gray-300 hover:text-neonCyan py-2">KONTAK</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+            
+            <!-- Hero Text Content -->
+            <div class="lg:col-span-7 text-center lg:text-left space-y-6 order-2 lg:order-1">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-950/60 border border-neonCyan/40 text-neonCyan text-xs sm:text-sm font-tech tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-neonGreen animate-ping"></span>
+                    SYSTEM ONLINE & READY TO DEPLOY
+                </div>
+
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-tech tracking-tight text-white leading-tight">
+                    HALO, SAYA <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonCyan via-blue-400 to-neonMagenta text-glow-cyan">
+                        REZKY RAFAEL WACHYUDI
+                    </span>
+                </h1>
+
+                <p class="text-gray-300 text-base sm:text-lg max-w-2xl leading-relaxed font-light">
+                    Siswa / Teknisi <span class="text-neonCyan font-semibold">Teknik Komputer & Jaringan (TKJ)</span> yang berdedikasi tinggi dalam perancangan jaringan komputer, administrasi server Linux, konfigurasi router MikroTik & Cisco, serta troubleshooting hardware & jaringan.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap gap-4 justify-center lg:justify-start pt-4">
+                    <a href="#contact" class="px-8 py-3.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-black font-tech font-bold hover:shadow-neon-cyan transition-all transform hover:-translate-y-1 flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> HUBUNGI SAYA
+                    </a>
+                    <a href="#projects" class="px-8 py-3.5 rounded-lg bg-cyberDark border border-cyan-400/50 text-neonCyan font-tech font-bold hover:bg-cyan-500/10 hover:border-neonCyan transition-all transform hover:-translate-y-1 flex items-center gap-2">
+                        <i class="fa-solid fa-folder-open"></i> LIHAT PROYEK
+                    </a>
+                </div>
+
+                <!-- Quick Stats / Badges -->
+                <div class="pt-6 grid grid-cols-3 gap-4 border-t border-gray-800 text-center lg:text-left">
+                    <div>
+                        <div class="font-tech text-2xl font-bold text-neonCyan">LAN/WAN</div>
+                        <div class="text-xs text-gray-400">Network Config</div>
+                    </div>
+                    <div>
+                        <div class="font-tech text-2xl font-bold text-neonMagenta">Linux</div>
+                        <div class="text-xs text-gray-400">Server Admin</div>
+                    </div>
+                    <div>
+                        <div class="font-tech text-2xl font-bold text-neonGreen">MikroTik</div>
+                        <div class="text-xs text-gray-400">Routing & Bandwidth</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Image Section with Live Photo Upload Feature -->
+            <div class="lg:col-span-5 flex justify-center order-1 lg:order-2">
+                <div class="relative group">
+                    <!-- Glowing Background Ring -->
+                    <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-neonCyan via-neonMagenta to-neonGreen opacity-75 blur-lg group-hover:opacity-100 transition duration-1000 animate-pulse-slow"></div>
+                    
+                    <!-- Profile Container -->
+                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full glass-panel border-2 border-neonCyan p-3 overflow-hidden flex items-center justify-center">
+                        <img id="profileImage" src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=800&auto=format&fit=crop" 
+                             alt="Rezky Rafael Wachyudi" 
+                             class="w-full h-full rounded-full object-cover transition-transform duration-500 group-hover:scale-105">
+
+                        <!-- Overlay Edit Photo Button -->
+                        <label for="photoUpload" class="absolute inset-0 bg-black/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center cursor-pointer text-white">
+                            <i class="fa-solid fa-camera text-3xl text-neonCyan mb-2"></i>
+                            <span class="font-tech text-xs tracking-wider font-semibold text-center px-4">GANTI FOTO PROFIL</span>
+                        </label>
+                        <input type="file" id="photoUpload" accept="image/*" class="hidden">
+                    </div>
+
+                    <!-- Tech Badge Floating Below -->
+                    <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 glass-panel border border-neonGreen px-4 py-1.5 rounded-full flex items-center gap-2 shadow-neon-green">
+                        <i class="fa-solid fa-circle-check text-neonGreen text-xs"></i>
+                        <span class="font-tech text-xs text-white tracking-widest">TKJ ENGINEER</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-tech text-3xl sm:text-4xl font-bold text-white tracking-wide">
+                TENTANG <span class="text-neonCyan text-glow-cyan">SAYA</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-neonCyan to-neonMagenta mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1: Network Engineering -->
+            <div class="glass-panel p-8 rounded-2xl border border-cyan-500/20 hover:border-neonCyan transition-all duration-300 transform hover:-translate-y-2">
+                <div class="w-14 h-14 rounded-xl bg-cyan-500/10 border border-cyan-400 flex items-center justify-center text-neonCyan text-2xl mb-6">
+                    <i class="fa-solid fa-diagram-project"></i>
+                </div>
+                <h3 class="font-tech text-xl font-bold text-white mb-3">Arsitektur Jaringan</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Memahami konsep TCP/IP, OSI Layer, pengalokasian IP Address (IPv4 & Subnetting VLSM), pembuatan topologi LAN/WAN, serta pengkabelan Fiber Optic dan UTP (Crimping RJ45).
+                </p>
+            </div>
+
+            <!-- Card 2: Server Administration -->
+            <div class="glass-panel p-8 rounded-2xl border border-pink-500/20 hover:border-neonMagenta transition-all duration-300 transform hover:-translate-y-2">
+                <div class="w-14 h-14 rounded-xl bg-pink-500/10 border border-pink-400 flex items-center justify-center text-neonMagenta text-2xl mb-6">
+                    <i class="fa-solid fa-server"></i>
+                </div>
+                <h3 class="font-tech text-xl font-bold text-white mb-3">Administrasi Server</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Berpengalaman dalam mengonfigurasi Server berbasis Linux (Debian/Ubuntu Server) untuk DNS, DHCP, Web Server (Apache/Nginx), FTP, SSH, serta Mail Server.
+                </p>
+            </div>
+
+            <!-- Card 3: Hardware & Router -->
+            <div class="glass-panel p-8 rounded-2xl border border-emerald-500/20 hover:border-neonGreen transition-all duration-300 transform hover:-translate-y-2">
+                <div class="w-14 h-14 rounded-xl bg-emerald-500/10 border border-emerald-400 flex items-center justify-center text-neonGreen text-2xl mb-6">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <h3 class="font-tech text-xl font-bold text-white mb-3">Hardware & Router OS</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Routing & Management menggunakan MikroTik RouterOS (Hotspot User Manager, Bandwidth Limiter Queue, Firewall Filter Rules) serta Troubleshooting Hardware PC.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+        <div class="text-center mb-16">
+            <h2 class="font-tech text-3xl sm:text-4xl font-bold text-white tracking-wide">
+                KEAHLIAN <span class="text-neonMagenta text-glow-magenta">TEKNIK TKJ</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-neonMagenta to-neonCyan mx-auto mt-3 rounded-full"></div>
+            <p class="text-gray-400 text-sm mt-4 max-w-xl mx-auto">Penguasaan perangkat lunak, protokol jaringan, dan sistem operasi dalam kompetensi TKJ.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Skill 1 -->
+            <div class="glass-panel p-6 rounded-xl border border-cyan-500/20">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-tech text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-router text-neonCyan"></i> Konfigurasi MikroTik & RouterOS
+                    </span>
+                    <span class="font-tech text-xs text-neonCyan">90%</span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-2.5 overflow-hidden">
+                    <div class="bg-gradient-to-r from-cyan-500 to-neonCyan h-2.5 rounded-full" style="width: 90%"></div>
+                </div>
+            </div>
+
+            <!-- Skill 2 -->
+            <div class="glass-panel p-6 rounded-xl border border-cyan-500/20">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-tech text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-brands fa-linux text-neonMagenta"></i> Linux Server (Debian / Ubuntu)
+                    </span>
+                    <span class="font-tech text-xs text-neonMagenta">85%</span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-2.5 overflow-hidden">
+                    <div class="bg-gradient-to-r from-pink-500 to-neonMagenta h-2.5 rounded-full" style="width: 85%"></div>
+                </div>
+            </div>
+
+            <!-- Skill 3 -->
+            <div class="glass-panel p-6 rounded-xl border border-cyan-500/20">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-tech text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-network-wired text-neonGreen"></i> Pengkabelan LAN & Fiber Optic (Splicing/Crimping)
+                    </span>
+                    <span class="font-tech text-xs text-neonGreen">95%</span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-2.5 overflow-hidden">
+                    <div class="bg-gradient-to-r from-emerald-500 to-neonGreen h-2.5 rounded-full" style="width: 95%"></div>
+                </div>
+            </div>
+
+            <!-- Skill 4 -->
+            <div class="glass-panel p-6 rounded-xl border border-cyan-500/20">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-tech text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-cyan-400"></i> Network Security & Firewall Rules
+                    </span>
+                    <span class="font-tech text-xs text-cyan-400">80%</span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-2.5 overflow-hidden">
+                    <div class="bg-cyan-400 h-2.5 rounded-full" style="width: 80%"></div>
+                </div>
+            </div>
+
+            <!-- Skill 5 -->
+            <div class="glass-panel p-6 rounded-xl border border-cyan-500/20">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-tech text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-computer text-purple-400"></i> Computer Hardware & Repair Troubleshooting
+                    </span>
+                    <span class="font-tech text-xs text-purple-400">92%</span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-2.5 overflow-hidden">
+                    <div class="bg-purple-500 h-2.5 rounded-full" style="width: 92%"></div>
+                </div>
+            </div>
+
+            <!-- Skill 6 -->
+            <div class="glass-panel p-6 rounded-xl border border-cyan-500/20">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-tech text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-sitemap text-amber-400"></i> Cisco Packet Tracer Simulation
+                    </span>
+                    <span class="font-tech text-xs text-amber-400">88%</span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-2.5 overflow-hidden">
+                    <div class="bg-amber-400 h-2.5 rounded-full" style="width: 88%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Showcase Section -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-tech text-3xl sm:text-4xl font-bold text-white tracking-wide">
+                PROYEK <span class="text-neonGreen">TKJ TERBARU</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-neonGreen to-neonCyan mx-auto mt-3 rounded-full"></div>
+            <p class="text-gray-400 text-sm mt-4">Portofolio simulasi dan implementasi nyata jaringan komputer.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="glass-panel rounded-2xl overflow-hidden border border-cyan-500/20 group hover:border-neonCyan transition-all duration-300">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop" alt="MikroTik Router Setup" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-cyberDark to-transparent"></div>
+                    <span class="absolute top-3 right-3 bg-neonCyan/20 border border-neonCyan text-neonCyan font-tech text-xs px-2.5 py-1 rounded-full">MikroTik</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-tech text-lg font-bold text-white mb-2 group-hover:text-neonCyan transition-colors">Setup Hotspot & Bandwidth Queue</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                        Mengonfigurasi MikroTik RB750 untuk jaringan sekolah dengan manajemen bandwidth Simple Queue dan portal login voucher hotspot.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-tech text-gray-500">
+                        <span>Winbox</span> • <span>User Manager</span> • <span>NAT</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="glass-panel rounded-2xl overflow-hidden border border-pink-500/20 group hover:border-neonMagenta transition-all duration-300">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop" alt="Linux Debian Server" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-cyberDark to-transparent"></div>
+                    <span class="absolute top-3 right-3 bg-neonMagenta/20 border border-neonMagenta text-neonMagenta font-tech text-xs px-2.5 py-1 rounded-full">Debian Linux</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-tech text-lg font-bold text-white mb-2 group-hover:text-neonMagenta transition-colors">Server Mail & Web Domain</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                        Membangun infrastruktur server lokal Debian dengan BIND9 DNS, Apache Web Server, serta Mail Server SquirrelMail.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-tech text-gray-500">
+                        <span>BIND9</span> • <span>Apache2</span> • <span>Postfix</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="glass-panel rounded-2xl overflow-hidden border border-emerald-500/20 group hover:border-neonGreen transition-all duration-300">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1551703599-6b3e8379aa8c?q=80&w=800&auto=format&fit=crop" alt="LAN Fiber Optic Infrastructure" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-cyberDark to-transparent"></div>
+                    <span class="absolute top-3 right-3 bg-neonGreen/20 border border-neonGreen text-neonGreen font-tech text-xs px-2.5 py-1 rounded-full">Topologi LAN</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-tech text-lg font-bold text-white mb-2 group-hover:text-neonGreen transition-colors">Instalasi Laboratorium Komputer</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                        Perancangan pengkabelan struktur kabel UTP, instalasi switch managed, penataan server rack, dan pengujian throughput ping.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-tech text-gray-500">
+                        <span>VLAN</span> • <span>Patch Panel</span> • <span>RJ45</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Social Media Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-cyan-500/30 relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-neonCyan/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="text-center mb-12">
+                <h2 class="font-tech text-3xl sm:text-4xl font-bold text-white tracking-wide">
+                    HUBUNGI <span class="text-neonCyan text-glow-cyan">REZKY RAFAEL</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-neonCyan to-neonGreen mx-auto mt-3 rounded-full"></div>
+                <p class="text-gray-300 text-sm mt-4">Mari terhubung untuk diskusi proyek jaringan, konsultasi IT, atau kolaborasi.</p>
+            </div>
+
+            <!-- Fast Contact Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-12">
+                <!-- WhatsApp Card -->
+                <a href="https://wa.me/62895325377426" target="_blank" class="glass-panel p-5 rounded-2xl border border-emerald-500/30 hover:border-neonGreen hover:shadow-neon-green transition-all flex items-center gap-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-400 flex items-center justify-center text-neonGreen text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-400 font-tech">TELEPON / WHATSAPP</div>
+                        <div class="text-white font-tech font-bold group-hover:text-neonGreen transition-colors">0895325377426</div>
+                    </div>
+                </a>
+
+                <!-- Email Card -->
+                <a href="mailto:rezkyrafaelw@gmail.com" class="glass-panel p-5 rounded-2xl border border-cyan-500/30 hover:border-neonCyan hover:shadow-neon-cyan transition-all flex items-center gap-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-400 flex items-center justify-center text-neonCyan text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-400 font-tech">EMAIL RESMI</div>
+                        <div class="text-white font-tech font-bold text-sm sm:text-base group-hover:text-neonCyan transition-colors">rezkyrafaelw@gmail.com</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Social Media Neon Buttons -->
+            <div class="text-center">
+                <h4 class="font-tech text-xs tracking-widest text-gray-400 mb-6">MEDIA SOSIAL RESMI</h4>
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+                    <!-- TikTok -->
+                    <a href="https://tiktok.com/@f4el36" target="_blank" rel="noopener noreferrer" 
+                       class="w-12 h-12 rounded-xl glass-panel border border-pink-500/40 text-pink-400 hover:text-white hover:bg-pink-500 hover:border-pink-500 hover:shadow-neon-magenta flex items-center justify-center text-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/rezkyr4f4el?igsh=MWVqejRxZDdha3A3Zg==" target="_blank" rel="noopener noreferrer" 
+                       class="w-12 h-12 rounded-xl glass-panel border border-purple-500/40 text-purple-400 hover:text-white hover:bg-gradient-to-tr hover:from-amber-500 hover:via-pink-500 hover:to-purple-600 hover:border-purple-400 flex items-center justify-center text-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <!-- YouTube -->
+                    <a href="https://www.youtube.com/@rezkyrafaelwachyudi" target="_blank" rel="noopener noreferrer" 
+                       class="w-12 h-12 rounded-xl glass-panel border border-red-500/40 text-red-400 hover:text-white hover:bg-red-600 hover:border-red-500 flex items-center justify-center text-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/share/1BVKJyEygv/" target="_blank" rel="noopener noreferrer" 
+                       class="w-12 h-12 rounded-xl glass-panel border border-blue-500/40 text-blue-400 hover:text-white hover:bg-blue-600 hover:border-blue-500 flex items-center justify-center text-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-cyan-500/20 py-8 text-center text-xs text-gray-500 font-tech">
+        <p>© 2026 REZKY RAFAEL WACHYUDI — JURUSAN TEKNIK KOMPUTER & JARINGAN (TKJ)</p>
+    </footer>
+
+    <!-- JavaScript Interactivity Script -->
+    <script>
+        // --- 1. Dynamic Mobile Menu Toggle ---
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- 2. Live Profile Photo Upload Feature ---
+        const photoUpload = document.getElementById('photoUpload');
+        const profileImage = document.getElementById('profileImage');
+
+        photoUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    profileImage.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // --- 3. Interactive Cyber Network Particle Canvas ---
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const nodes = [];
+        const nodeCount = Math.min(Math.floor(window.innerWidth / 20), 65);
+
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.8,
+                vy: (Math.random() - 0.5) * 0.8,
+                radius: Math.random() * 2 + 1,
+                color: Math.random() > 0.5 ? '#00f3ff' : '#ff007f'
+            });
+        }
+
+        function drawNetwork() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Lines (Connections)
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(0, 243, 255, ${1 - dist / 130 * 0.8})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw Nodes
+            nodes.forEach(node => {
+                node.x += node.vx;
+                node.y += node.vy;
+
+                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fillStyle = node.color;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = node.color;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            });
+
+            requestAnimationFrame(drawNetwork);
+        }
+
+        window.onload = function() {
+            drawNetwork();
+        };
+    </script>
+</body>
+</html>
